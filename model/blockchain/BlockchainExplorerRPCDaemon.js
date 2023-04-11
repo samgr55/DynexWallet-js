@@ -117,17 +117,17 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     throw 'invalid_transaction';
                 if (response.blocks.length > 0) {
                     for (var _i = 0, _a = response.blocks; _i < _a.length; _i++) {
-                        for (var _j=0, _b= _a[_i]; _j< _b.length;_j++)
+                        for (var _j=0, _b= _a[_i].transactions; _j< _b.length;_j++)
                     {
                         var rawTx = _b[_j];
                         var tx = null;
                         try {
-                            tx = rawTx.transaction;
+                            tx = rawTx;
                         }
                         catch (e) {
                             try {
                                 //compat for some invalid endpoints
-                                tx = rawTx.transaction;
+                                tx = rawTx;
                             }
                             catch (e) {
                             }
@@ -136,14 +136,16 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                             tx.ts = rawTx.timestamp;
                             tx.height = rawTx.blockIndex;
                             tx.hash = rawTx.hash;
-                            console.log(tx.hash);
+                            //console.log(tx.hash);
                             if (rawTx.outputs.length > 0)
                                 tx.global_index_start = rawTx.outputs[0].globalIndex;
+
                             tx.output_indexes = rawTx.outputs.length;
                             formatted.push(tx);
                         }
                     }
                 }
+                    
                     return formatted;
                 }
                 else {
@@ -208,7 +210,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
         };
         /* ---- I will do it later 
         BlockchainExplorerRpcDaemon.prototype.resolveOpenAlias = function (domain) {
-            return this.makeRpcRequest('resolve_open_alias', { url: domain }).then(function (response) {
+            return this.makeRpcRequest('resolveopenalias', { url: domain }).then(function (response) {
                 if (response.addresses && response.addresses.length > 0)
                     return { address: response.addresses[0], name: null };
                 throw 'not_found';
