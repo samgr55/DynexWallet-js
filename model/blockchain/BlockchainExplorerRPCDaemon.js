@@ -117,7 +117,9 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     throw 'invalid_transaction';
                 if (response.block.length > 0) {
                     for (var _i = 0, _a = response.block; _i < _a.length; _i++) {
-                        var rawTx = _a[_i];
+                        for (var _j=0, _b= _a[_i]; _j< _b.length;_j++)
+                    {
+                        var rawTx = _b[_j];
                         var tx = null;
                         try {
                             tx = rawTx.transaction;
@@ -132,14 +134,15 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                         }
                         if (tx !== null) {
                             tx.ts = rawTx.timestamp;
-                            tx.height = rawTx.height;
+                            tx.height = rawTx.blockIndex;
                             tx.hash = rawTx.hash;
-                            if (rawTx.output_indexes.length > 0)
-                                tx.global_index_start = rawTx.output_indexes[0];
-                            tx.output_indexes = rawTx.output_indexes;
+                            if (rawTx.outputs.length > 0)
+                                tx.global_index_start = rawTx.outputs[0].globalIndex;
+                            tx.output_indexes = rawTx.outputs.length;
                             formatted.push(tx);
                         }
                     }
+                }
                     return formatted;
                 }
                 else {
