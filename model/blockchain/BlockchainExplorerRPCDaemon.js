@@ -6,7 +6,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
     var BlockchainExplorerRpcDaemon = /** @class */ (function () {
         function BlockchainExplorerRpcDaemon(daemonAddress) {
             if (daemonAddress === void 0) { daemonAddress = null; }
-            //daemonAddress = config.nodeList[Math.floor(Math.random() * Math.floor(config.nodeList.length))];
             this.daemonAddress = config.nodeUrl;
             this.phpProxy = false;
             this.cacheInfo = null;
@@ -158,7 +157,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     }
                     catch (e) {
                         try {
-                            //compat for some invalid endpoints
                             tx = rawTx.transaction;
                         }
                         catch (e) {
@@ -201,6 +199,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     throw transactions;
             });
         };
+        /* ---- I will do it later 
         BlockchainExplorerRpcDaemon.prototype.resolveOpenAlias = function (domain) {
             return this.makeRpcRequest('resolve_open_alias', { url: domain }).then(function (response) {
                 if (response.addresses && response.addresses.length > 0)
@@ -208,14 +207,14 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 throw 'not_found';
             });
         };
+        */ 
         BlockchainExplorerRpcDaemon.prototype.getNetworkInfo = function () {
             return this.makeRpcRequest('getlastblockheader').then(function (raw) {
-                //console.log(raw);
                 return {
                     'node': config.nodeUrl,
                     'major_version': raw.block_header['major_version'],
                     'hash': raw.block_header['hash'],
-                    'reward': raw.block_header['reward']*1000,
+                    'reward': raw.block_header['reward'] * 1000,
                     'height': raw.block_header['height'],
                     'timestamp': raw.block_header['timestamp'],
                     'difficulty': raw.block_header['difficulty']
