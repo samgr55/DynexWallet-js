@@ -108,14 +108,14 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 tempStartBlock = 1;
             }
             else {
-                tempStartBlock = startBlock;
+                startBlock = _this.cacheHeight;
             }
-            return this.makeRpcRequest('getblockbyheight', {blockHeight : _this.cacheHeight}).then(function (response) {
+            return this.makeRpcRequest('getblockbyheight', {blockHeight : startBlock}).then(function (response) {
                 var formatted = [];
                 if (response.status !== 'OK')
                     throw 'invalid_transaction_answer';
-                if (response.transactions.length > 0) {
-                    for (var _i = 0, _a = response.transactions; _i < _a.length; _i++) {
+                if (response.block.transactions.length > 0) {
+                    for (var _i = 0, _a = response.block.transactions; _i < _a.length; _i++) {
                         var rawTx = _a[_i];
                         var tx = null;
                         try {
