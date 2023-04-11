@@ -110,8 +110,8 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
             else {
                 tempStartBlock = startBlock;
             }
-
-            return this.makeRpcRequest('getblockbyheight', {blockHeight : startBlock}).then(function (response) {
+            var heights = this.range(startBlock, endBlock);
+            return this.makeRpcRequest('getblockbyheight', {blockHeight : heights}).then(function (response) {
                 var formatted = [];
                 if (response.status !== 'OK')
                     throw 'invalid_transaction_answer';
