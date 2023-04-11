@@ -108,8 +108,9 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 tempStartBlock = 1;
             }
             else {
-                startBlock = _this.cacheHeight;
+                tempStartBlock = startBlock;
             }
+
             return this.makeRpcRequest('getblockbyheight', {blockHeight : startBlock}).then(function (response) {
                 var formatted = [];
                 if (response.status !== 'OK')
