@@ -115,8 +115,8 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 var formatted = [];
                 if (response.status !== 'OK')
                     throw 'invalid_transaction';
-                if (response.block.length > 0) {
-                    for (var _i = 0, _a = response.block; _i < _a.length; _i++) {
+                if (response.blocks.length > 0) {
+                    for (var _i = 0, _a = response.blocks; _i < _a.length; _i++) {
                         for (var _j=0, _b= _a[_i]; _j< _b.length;_j++)
                     {
                         var rawTx = _b[_j];
@@ -136,6 +136,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                             tx.ts = rawTx.timestamp;
                             tx.height = rawTx.blockIndex;
                             tx.hash = rawTx.hash;
+                            console.log(tx.hash);
                             if (rawTx.outputs.length > 0)
                                 tx.global_index_start = rawTx.outputs[0].globalIndex;
                             tx.output_indexes = rawTx.outputs.length;
