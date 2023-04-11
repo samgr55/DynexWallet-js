@@ -228,7 +228,7 @@ define(["require", "exports", "./Transaction", "./TransactionsExplorer"], functi
                         previousStartBlock = self.lastMaximumHeight;
                     if (endBlock_1 > self.lastMaximumHeight)
                         endBlock_1 = self.lastMaximumHeight;
-                    self.explorer.getTransactionsForBlocks(previousStartBlock, endBlock_1, self.wallet.options.checkMinerTx).then(function (transactions) {
+                    self.explorer.getTransactionsForBlocks(previousStartBlock, endBlock_1, true).then(function (transactions) {
                         //to ensure no pile explosion
                         if (transactions === 'OK') {
                             self.lastBlockLoading = endBlock_1;
