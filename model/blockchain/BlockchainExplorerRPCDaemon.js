@@ -111,12 +111,12 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 tempStartBlock = startBlock;
             }
             var heights = this.range(startBlock, endBlock);
-            return this.makeRpcRequest('getblockbyheight', {blockHeight : heights}).then(function (response) {
+            return this.makeRpcRequest('getblockbyheight', {blockHeight : heights, include_miner_txs:includeMinerTxs}).then(function (response) {
                 var formatted = [];
                 if (response.status !== 'OK')
-                    throw 'invalid_transaction_answer';
-                if (response.block.transactions.length > 0) {
-                    for (var _i = 0, _a = response.block.transactions; _i < _a.length; _i++) {
+                    throw 'invalid_transaction';
+                if (response.block.length > 0) {
+                    for (var _i = 0, _a = response.block; _i < _a.length; _i++) {
                         var rawTx = _a[_i];
                         var tx = null;
                         try {
@@ -145,7 +145,9 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 else {
                     return response.status;
                 }
+            
             });
+        
         };
         BlockchainExplorerRpcDaemon.prototype.getTransactionPool = function () {
             return this.makeRpcRequest('gettransactionspool').then(function (response) {
