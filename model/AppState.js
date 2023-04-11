@@ -104,7 +104,7 @@ define(["require", "exports", "../lib/numbersLab/DependencyInjector", "./Wallet"
                                             var promisesBlocks = [];
                                             for (var _b = 0, blockchainHeightToRescan_1 = blockchainHeightToRescan; _b < blockchainHeightToRescan_1.length; _b++) {
                                                 var height = blockchainHeightToRescan_1[_b];
-                                                promisesBlocks.push(blockchainExplorer.getTransactionsForBlocks(parseInt(height), parseInt(height), wallet.options.checkMinerTx));
+                                                promisesBlocks.push(blockchainExplorer.getTransactionsForBlocks(parseInt(height), parseInt(height), true));
                                                 //console.log(`promisesBlocks.length: ${promisesBlocks.length}`);
                                             }
                                             Promise.all(promisesBlocks).then(function (arrayOfTxs) {
