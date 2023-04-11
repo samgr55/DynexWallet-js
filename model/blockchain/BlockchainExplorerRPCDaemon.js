@@ -97,7 +97,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
          */
         BlockchainExplorerRpcDaemon.prototype.range = function (start, end) {
             var numbers = [];
-            for (var i = start; i <= end; ++i) {
+            for (var i = start; i < end; ++i) {
                 numbers.push(i);
             }
             return numbers;
