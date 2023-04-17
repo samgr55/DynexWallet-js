@@ -14,7 +14,7 @@ global.config = {
     testnetExplorerUrlHash: "",
     testnetExplorerUrlBlock: "",
     testnet: false,
-    coinUnitPlaces: 12,
+    coinUnitPlaces: 9,
     coinDisplayUnitPlaces: 2,
     txMinConfirms: 9,
     txCoinbaseMinConfirms: 10,
@@ -32,7 +32,7 @@ global.config = {
     openAliasPrefix: "dnx",
     coinName: 'Dynex',
     coinUriPrefix: 'Dynex:',
-    avgBlockTime: 240,
+    avgBlockTime: 120,
     maxBlockNumber: 500000000,
 };
 var randInt = Math.floor(Math.random() * Math.floor(config.nodeList.length));
