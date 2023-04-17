@@ -233,7 +233,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     'node': config.nodeUrl,
                     'major_version': raw.block_header['major_version'],
                     'hash': raw.block_header['hash'],
-                    'reward': raw.block_header['reward'] * 1000,
+                    'reward': raw.block_header['reward'],
                     'height': raw.block_header['height'],
                     'timestamp': raw.block_header['timestamp'],
                     'difficulty': raw.block_header['difficulty']
