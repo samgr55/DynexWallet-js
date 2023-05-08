@@ -112,51 +112,51 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
             }
             var heights = this.range(startBlock, endBlock);
             return this.makeRpcRequest('getblocksbyheights', {blockHeights : heights, include_miner_txs:true}).then(function (response) {
-                var formatted = [];
+                var blocks = response.blocks;
+                var txs = [];
                 if (response.status !== 'OK')
                     throw 'invalid_transaction';
-                if (response.blocks.length > 0) {
-                    for (var _i = 0, _a = response.blocks; _i < _a.length; _i++)
-                    {
-                        for (var _j=0, _b= _a[_i].transactions; _j< _b.length;_j++)
-                        {
-                            for (var _k=0, _c=_b[_j].inputs;_k< _c.length;_k++)
-                            {
-                            
-                            var rawTx = _b[_j];
-                            
-                            var tx = null;
-                            try {
-                             tx = rawTx;
-                            }
-                            catch (e) {
-                            try {
-                                //compat for some invalid endpoints
-                                tx = rawTx;
-                            }
-                            catch (e) {
-                            }
-                            }
-                            if (tx !== null) 
-                            {
-                            tx.ts = rawTx.timestamp;
-                            tx.height = rawTx.blockIndex;
-                            if (_k > 0)
-                                tx.hash = rawTx.inputs[_k].data.outputs[0].transactionHash;
-                            else
+                
+                if (blocks.length > 0) {
+                    for (var i = 0; i < blocks.length; i++) {
+                            for (var j = 0; j < blocks[i].transactions.length; j++) {
+                                // transform Transactions
+                                var rawTx = blocks[i].transactions[j];
+                                var tx = {};
+                                tx.fee = rawTx.fee;
+                                tx.unlock_time = rawTx.unlockTime;
+                                tx.height = rawTx.blockIndex;
+                                tx.timestamp = rawTx.timestamp;
                                 tx.hash = rawTx.hash;
-                            console.log(tx.hash);
-                            if (rawTx.outputs.length > 0)
-                                tx.global_index_start = rawTx.outputs[0].globalIndex;
-
-                            tx.output_indexes = rawTx.outputs.length;
-                            formatted.push(tx);
-                            }
+                                tx.publicKey = rawTx.extra.publicKey;
+                                tx.paymentId = rawTx.paymentId === "0000000000000000000000000000000000000000000000000000000000000000" ? "" : rawTx.paymentId;
+                                tx.vin = [];
+                                tx.vout = [];
+                                //map the inputs and outputs
+                                for (var x = 0; x < rawTx.inputs.length; x++) {
+                                    var vin = {};
+                                    var input = rawTx.inputs[x];
+                                    vin.amount = input.data.input.amount;
+                                    vin.k_image = input.data.input.k_image;
+                                    input = null;
+                                    tx.vin.push(vin);
+                                }
+                                for (var x = 0; x < rawTx.outputs.length; x++) {
+                                    var vout = {};
+                                    var output = rawTx.outputs[x];
+                                    vout.amount = output.output.amount;
+                                    vout.globalIndex = output.globalIndex;
+                                    vout.key = output.output.target.data.key;
+                                    output = null;
+                                    tx.vout.push(vout);
+                                }
+                                rawTx = null;
+                                txs.push(tx);
                             }
                         }
-                    }
+
                     
-                    return formatted;
+                    return txs;
                 }
                 else {
                     return response.status;
