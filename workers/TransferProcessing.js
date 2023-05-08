@@ -21,14 +21,10 @@ define(["require", "exports", "../model/TransactionsExplorer", "../model/Wallet"
                 postMessage('missing_wallet');
                 return;
             }
-            var readMinersTx = typeof currentWallet.options.checkMinerTx !== 'undefined' && currentWallet.options.checkMinerTx;
             var rawTransactions = event.transactions;
             var transactions = [];
             for (var _i = 0, rawTransactions_1 = rawTransactions; _i < rawTransactions_1.length; _i++) {
                 var rawTransaction = rawTransactions_1[_i];
-                if (!readMinersTx && TransactionsExplorer_1.TransactionsExplorer.isMinerTx(rawTransaction)) {
-                    continue;
-                }
                 var transaction = TransactionsExplorer_1.TransactionsExplorer.parse(rawTransaction, currentWallet);
                 if (transaction !== null) {
                     //console.log(`parsed tx ${transaction['hash']} from rawTransaction`);

@@ -2,8 +2,7 @@
 var global = typeof window !== 'undefined' ? window : self;
 global.config = {
     nodeList: [
-        "http://137.220.61.126:18333/",
-        "http://95.179.252.220:18333/"
+        "http://dynexmallobservice.dynexcoin.org:18333/"
         
     ],
     nodeUrl: "",
