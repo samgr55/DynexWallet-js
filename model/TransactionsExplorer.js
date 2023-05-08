@@ -93,6 +93,7 @@ define(["require", "exports", "./Transaction", "./MathUtil", "./Cn"], function (
             var txExtras = [];
             try {
                 var hexExtra = [];
+                //console.log(rawTransaction.publicKey)
                 var uint8Array = hextobin(rawTransaction.extra);
                 for (var i = 0; i < uint8Array.byteLength; i++) {
                     hexExtra[i] = uint8Array[i];
