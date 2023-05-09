@@ -61,7 +61,7 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             this.domainAliasAddress = null;
             this.txDestinationName = null;
             this.txDescription = null;
-            this.mixIn = config.defaultMixin.toString();
+            this.mixIn = '0';
             this.stopScan();
         };
         SendView.prototype.startNfcScan = function () {
@@ -422,7 +422,7 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             VueAnnotate_1.VueVar(true)
         ], SendView.prototype, "paymentIdValid", void 0);
         __decorate([
-            VueAnnotate_1.VueVar('3')
+            VueAnnotate_1.VueVar('0')
         ], SendView.prototype, "mixIn", void 0);
         __decorate([
             VueAnnotate_1.VueVar(true)
