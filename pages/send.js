@@ -129,7 +129,6 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             }
         };
         SendView.prototype.handleScanResult = function (result) {
-            //console.log('Scan result:', result);
             var self = this;
             var parsed = false;
             try {

@@ -35,6 +35,8 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             if (!((!this.viewOnly && this.validPrivateSpendKey) ||
                 (this.viewOnly && this.validPublicAddress && this.validPrivateViewKey)))
                 return false;
+            if (!((!this.viewOnly && this.validPrivateViewKey)))
+                return false;
             return true;
         };
         ImportView.prototype.importWallet = function () {
