@@ -1,4 +1,3 @@
-
 define(["require", "exports", "./Transaction", "./TransactionsExplorer"], function (require, exports, Transaction_1, TransactionsExplorer_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
