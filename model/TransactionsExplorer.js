@@ -1,7 +1,7 @@
-
 define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", "./CnUtilNative", "./Cn"], function (require, exports, Transaction_1, CryptoUtils_1, MathUtil_1, CnUtilNative_1, Cn_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.TransactionsExplorer = exports.TX_EXTRA_NONCE_ENCRYPTED_PAYMENT_ID = exports.TX_EXTRA_NONCE_PAYMENT_ID = exports.TX_EXTRA_MYSTERIOUS_MINERGATE_TAG = exports.TX_EXTRA_TAG_ADDITIONAL_PUBKEYS = exports.TX_EXTRA_MERGE_MINING_TAG = exports.TX_EXTRA_NONCE = exports.TX_EXTRA_TAG_PUBKEY = exports.TX_EXTRA_TAG_PADDING = exports.TX_EXTRA_NONCE_MAX_COUNT = exports.TX_EXTRA_PADDING_MAX_COUNT = void 0;
     exports.TX_EXTRA_PADDING_MAX_COUNT = 255;
     exports.TX_EXTRA_NONCE_MAX_COUNT = 255;
     exports.TX_EXTRA_TAG_PADDING = 0x00;
@@ -37,7 +37,6 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
             }
             var outs = [];
             var ins = [];
-            console.log(rawTransaction);
             for (var iOut = 0; iOut < rawTransaction.vout.length; ++iOut) {
                 var out = rawTransaction.vout[iOut];
                 var amount = out.amount;
@@ -46,8 +45,6 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                 var mine_output = (out.key == generated_tx_pubkey);
                 if (mine_output) {
                     var transactionOut = new Transaction_1.TransactionOut();
-                    console.log(rawTransaction.globalIndex);
-                    
                     transactionOut.globalIndex = out.globalIndex;
                     transactionOut.amount = amount;
                     transactionOut.pubKey = out.key;
@@ -65,24 +62,21 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                     
                 } 
             }
-            //check if no read only wallet
             if (wallet.keys.priv.spend !== null && wallet.keys.priv.spend !== '') {
                 var keyImages = wallet.getTransactionKeyImages();
                 for (var iIn = 0; iIn < rawTransaction.vin.length; ++iIn) {
                     var input = rawTransaction.vin[iIn];
-                    if (keyImages.indexOf(input.key_image) != -1) {
-                        // console.log('found in', vin);
+                    if (keyImages.indexOf(input.k_image) != -1) {
                         var walletOuts = wallet.getAllOuts();
                         for (var _i = 0, walletOuts_1 = walletOuts; _i < walletOuts_1.length; _i++) {
                             var ut = walletOuts_1[_i];
-                            if (ut.keyImage == input.key_image) {
-                                // ins.push(vin.key.k_image);
-                                // sumIns += ut.amount;
+                            if (ut.keyImage == input.k_image)
+                            {
+
                                 var transactionIn = new Transaction_1.TransactionIn();
                                 transactionIn.amount = ut.amount;
                                 transactionIn.keyImage = ut.keyImage;
                                 ins.push(transactionIn);
-                                // console.log(ut);
                                 break;
                             }
                         }
@@ -154,8 +148,6 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
             // {"spend_key_images", json::array()}
             for (var _i = 0, _a = wallet.getAll(); _i < _a.length; _i++) {
                 var tr = _a[_i];
-                //todo improve to take into account miner tx
-                //only add outs unlocked
                 if (!tr.isConfirmed(blockchainHeight)) {
                     continue;
                 }
@@ -226,7 +218,7 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
             if (mixin === void 0) { mixin = config.defaultMixin; }
             return new Promise(function (resolve, reject) {
                 var neededFee = new JSBigInt(window.config.coinFee);
-                var pid_encrypt = false; //don't encrypt payment ID unless we find an integrated one
+                var pid_encrypt = false; 
                 var totalAmountWithoutFee = new JSBigInt(0);
                 var paymentIdIncluded = 0;
                 var paymentId = '';
@@ -261,7 +253,6 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                     if (userPaymentId.length <= 16 && /^[0-9a-fA-F]+$/.test(userPaymentId)) {
                         userPaymentId = ('0000000000000000' + userPaymentId).slice(-16);
                     }
-                    // now double check if ok
                     if ((userPaymentId.length !== 16 && userPaymentId.length !== 64) ||
                         (!(/^[0-9a-fA-F]{16}$/.test(userPaymentId)) && !(/^[0-9a-fA-F]{64}$/.test(userPaymentId)))) {
                         reject('invalid_payment_id');
@@ -274,7 +265,7 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                 var usingOuts = [];
                 var usingOuts_amount = new JSBigInt(0);
                 var unusedOuts = unspentOuts.slice(0);
-                var totalAmount = totalAmountWithoutFee.add(neededFee) /*.add(chargeAmount)*/;
+                var totalAmount = totalAmountWithoutFee.add(neededFee);
                 function pop_random_value(list) {
                     var idx = Math.floor(MathUtil_1.MathUtil.randomFloat() * list.length);
                     var val = list[idx];
@@ -294,7 +285,6 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                             + Cn_1.Cn.formatMoneyFull(usingOuts_amount) + " but need "
                             + Cn_1.Cn.formatMoneyFull(totalAmount)
                             + " (estimated fee " + Cn_1.Cn.formatMoneyFull(neededFee) + " DNX included)");
-                        // return;
                         reject({ error: 'balance_too_low' });
                         return;
                     }
