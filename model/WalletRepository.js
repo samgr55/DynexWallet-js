@@ -1,4 +1,3 @@
-
 define(["require", "exports", "./Wallet", "./CoinUri", "./Storage"], function (require, exports, Wallet_1, CoinUri_1, Storage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -147,7 +146,7 @@ define(["require", "exports", "./Wallet", "./CoinUri", "./Storage"], function (r
             //wallet help
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(10);
-            doc.text(110, 120, "To deposit funds to this paper wallet, send ");
+            doc.text(110, 120, "To deposit funds to this wallet, send ");
             doc.text(110, 125, "Dynex to the public address");
             doc.text(110, 135, "DO NOT REVEAL THE PRIVATE KEY");
             

@@ -1,4 +1,3 @@
-
 define(["require", "exports", "../WalletWatchdog"], function (require, exports, WalletWatchdog_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -120,7 +119,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 if (blocks.length > 0) {
                     for (var i = 0; i < blocks.length; i++) {
                             for (var j = 0; j < blocks[i].transactions.length; j++) {
-                                // transform Transactions
                                 var rawTx = blocks[i].transactions[j];
                                 var tx = {};
                                 tx.fee = rawTx.fee;
@@ -132,7 +130,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                                 tx.paymentId = rawTx.paymentId === "0000000000000000000000000000000000000000000000000000000000000000" ? "" : rawTx.paymentId;
                                 tx.vin = [];
                                 tx.vout = [];
-                                //map the inputs and outputs
                                 for (var x = 0; x < rawTx.inputs.length; x++) {
                                     var vin = {};
                                     var input = rawTx.inputs[x];
@@ -155,8 +152,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                                 txs.push(tx);
                             }
                         }
-
-                    
                     return txs;
                 }
                 else {
@@ -219,15 +214,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                     throw transactions;
             });
         };
-        /* ---- I will do it later 
-        BlockchainExplorerRpcDaemon.prototype.resolveOpenAlias = function (domain) {
-            return this.makeRpcRequest('resolveopenalias', { url: domain }).then(function (response) {
-                if (response.addresses && response.addresses.length > 0)
-                    return { address: response.addresses[0], name: null };
-                throw 'not_found';
-            });
-        };
-        */ 
+
         BlockchainExplorerRpcDaemon.prototype.getNetworkInfo = function () {
             return this.makeRpcRequest('getlastblockheader').then(function (raw) {
                 return {
@@ -242,7 +229,6 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
             });
         };
         BlockchainExplorerRpcDaemon.prototype.getRemoteNodeInformation = function () {
-            // TODO change to /feeaddress
             return this.getInfo().then(function (info) {
                 return {
                     'fee_address': info['fee_address'],

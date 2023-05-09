@@ -269,7 +269,7 @@ define(["require", "exports", "./Transaction", "./TransactionsExplorer"], functi
             }).catch(function () {
                 setTimeout(function () {
                     self.loadHistory();
-                }, 30 * 1000); //retry 30s later if an error occurred
+                }, 30 * 1000); 
             });
         };
         return WalletWatchdog;

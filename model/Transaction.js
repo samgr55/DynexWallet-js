@@ -9,8 +9,11 @@ define(["require", "exports"], function (require, exports) {
             this.keyImage = '';
             this.outputIdx = 0;
             this.globalIndex = 0;
-            this.pubKey = '';
             this.ephemeralPub = '';
+            this.pubKey = '';
+            this.rtcOutPk = '';
+            this.rtcMask = '';
+            this.rtcAmount = '';
         }
         TransactionOut.fromRaw = function (raw) {
             var nout = new TransactionOut();
@@ -18,8 +21,16 @@ define(["require", "exports"], function (require, exports) {
             nout.outputIdx = raw.outputIdx;
             nout.globalIndex = raw.globalIndex;
             nout.amount = raw.amount;
+            if (typeof raw.ephemeralPub !== 'undefined')
+                nout.ephemeralPub = raw.ephemeralPub;
             if (typeof raw.pubKey !== 'undefined')
                 nout.pubKey = raw.pubKey;
+            if (typeof raw.rtcOutPk !== 'undefined')
+                nout.rtcOutPk = raw.rtcOutPk;
+            if (typeof raw.rtcMask !== 'undefined')
+                nout.rtcMask = raw.rtcMask;
+            if (typeof raw.rtcAmount !== 'undefined')
+                nout.rtcAmount = raw.rtcAmount;
             return nout;
         };
         TransactionOut.prototype.export = function () {
@@ -29,6 +40,14 @@ define(["require", "exports"], function (require, exports) {
                 globalIndex: this.globalIndex,
                 amount: this.amount,
             };
+            if (this.rtcOutPk !== '')
+                data.rtcOutPk = this.rtcOutPk;
+            if (this.rtcMask !== '')
+                data.rtcMask = this.rtcMask;
+            if (this.rtcAmount !== '')
+                data.rtcAmount = this.rtcAmount;
+            if (this.ephemeralPub !== '')
+                data.ephemeralPub = this.ephemeralPub;
             if (this.pubKey !== '')
                 data.pubKey = this.pubKey;
             return data;
@@ -67,6 +86,7 @@ define(["require", "exports"], function (require, exports) {
             this.timestamp = 0;
             this.paymentId = '';
             this.fees = 0;
+            this.is_coinbase = false;
         }
         Transaction.fromRaw = function (raw) {
             var transac = new Transaction();
@@ -92,9 +112,11 @@ define(["require", "exports"], function (require, exports) {
             if (typeof raw.paymentId !== 'undefined')
                 transac.paymentId = raw.paymentId;
             if (typeof raw.fees !== 'undefined')
-                transac.fees = raw.fees;
+                transac.fees = raw.fee;
             if (typeof raw.hash !== 'undefined')
                 transac.hash = raw.hash;
+            if (typeof raw.is_coinbase !== 'undefined')
+                transac.is_coinbase = raw.is_coinbase;
             return transac;
         };
         Transaction.prototype.export = function () {
@@ -103,6 +125,7 @@ define(["require", "exports"], function (require, exports) {
                 txPubKey: this.txPubKey,
                 timestamp: this.timestamp,
                 hash: this.hash,
+                is_coinbase: this.is_coinbase,
             };
             if (this.ins.length > 0) {
                 var rins = [];
@@ -138,24 +161,27 @@ define(["require", "exports"], function (require, exports) {
             }
             return amount;
         };
+        Transaction.prototype.isCoinbase = function () {
+            return this.is_coinbase;
+        };
         Transaction.prototype.isConfirmed = function (blockchainHeight) {
-            if (this.blockHeight + config.txMinConfirms < blockchainHeight) {
+            if (this.isCoinbase() && this.blockHeight + config.txCoinbaseMinConfirms < blockchainHeight) {
+                return true;
+            }
+            else if (!this.isCoinbase() && this.blockHeight + config.txMinConfirms < blockchainHeight) {
                 return true;
             }
             return false;
         };
         Transaction.prototype.isFullyChecked = function () {
+            if (this.getAmount() === 0)
+                return false; //fusion
             for (var _i = 0, _a = this.ins; _i < _a.length; _i++) {
                 var input = _a[_i];
                 if (input.amount < 0)
                     return false;
             }
             return true;
-        };
-        Transaction.prototype.isFusionTx = function () {
-            if (this.getAmount() === 0)
-                return true; //fusion
-            return false;
         };
         return Transaction;
     }());
