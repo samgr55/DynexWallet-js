@@ -111,7 +111,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                 tempStartBlock = startBlock;
             }
             var heights = this.range(startBlock, endBlock);
-            return this.makeRpcRequest('getblocksbyheights', {blockHeights : heights, include_miner_txs:true}).then(function (response) {
+            return this.makeRpcRequest('getblocksbyheights', {blockHeights : heights}).then(function (response) {
                 var blocks = response.blocks;
                 var txs = [];
                 if (response.status !== 'OK')

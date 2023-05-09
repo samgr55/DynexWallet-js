@@ -1,5 +1,5 @@
 
-define(["require", "exports", "./CnUtilNative"], function (require, exports, CnUtilNative_1) {
+define(["require", "exports", "./CnUtilNative", "./Cn"], function (require, exports, CnUtilNative_1, Cn_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var CryptoUtils = /** @class */ (function () {
@@ -109,8 +109,8 @@ define(["require", "exports", "./CnUtilNative"], function (require, exports, CnU
         };
         CryptoUtils.decode_ringct = function (rv, pub, sec, i, mask, amount, derivation) {
             if (derivation === null)
-                derivation = cnUtil.generate_key_derivation(pub, sec); //[10;11]ms
-            var scalar1 = cnUtil.derivation_to_scalar(derivation, i); //[0.2ms;1ms]
+                derivation = Cn_1.cnUtil.generate_key_derivation(pub, sec); //[10;11]ms
+            var scalar1 = Cn_1.cnUtil.derivation_to_scalar(derivation, i); //[0.2ms;1ms]
             try {
                 // console.log(rv.type,'RCTTypeSimple='+RCTTypeSimple,'RCTTypeFull='+RCTTypeFull);
                 switch (rv.type) {
@@ -167,9 +167,9 @@ define(["require", "exports", "./CnUtilNative"], function (require, exports, CnU
             // CHECK_AND_ASSERT_MES(r, false, "key image helper: failed to derive_public_key(" << recv_derivation << ", " << real_output_index <<  ", " << ack.m_account_address.m_spend_public_key << ")");
             //
             // let in_ephemeral_sec = cnUtil.derive_secret_key(recv_derivation, real_output_index, ack.spend_secret_key);
-            var in_ephemeral_sec = cnUtil.derive_secret_key(recv_derivation, real_output_index, ack.spend_secret_key);
+            var in_ephemeral_sec = Cn_1.cnUtil.derive_secret_key(recv_derivation, real_output_index, ack.spend_secret_key);
             // console.log('in_ephemeral_sec',in_ephemeral_sec);
-            var ki = cnUtil.generate_key_image_2(in_ephemeral_pub, in_ephemeral_sec);
+            var ki = Cn_1.cnUtil.generate_key_image_2(in_ephemeral_pub, in_ephemeral_sec);
             // let end = Date.now();
             // console.log(end-start);
             return {
