@@ -249,7 +249,7 @@
 	  },
 	  "thankYouDonationModal":{
 		"title":"Thank you for your donation!",
-		"content":"Your help is appreciated. <br/>This donation will help make DynexWallet better",
+		"content":"Your help is appreciated. This donation will help make DynexWallet better",
 		"confirmText":"OK"
 	  },
 	  "transferSentModal":{
@@ -258,7 +258,7 @@
 	  },
 	  "transferExceptionModal":{
 		"title":"Oops...",
-		"content":"An error occurred. Please report this error: {details}",
+		"content":"An error occurred. Please report this error: {details} Note: Try different amount (lower)",
 		"confirmText":"OK"
 	  },
 	  "invalidAmountModal":{

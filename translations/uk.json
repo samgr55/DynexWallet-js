@@ -249,7 +249,7 @@
 	  },
 	  "thankYouDonationModal":{
 		"title":"Спасибі за ваше пожертвування!",
-		"content":"Ми цінуємо вашу підтримку. <br/>Це пожертвування допоможе зробити DynexWallet краще",
+		"content":"Ми цінуємо вашу підтримку. Це пожертвування допоможе зробити DynexWallet краще",
 		"confirmText":"Гаразд"
 	  },
 	  "transferSentModal":{

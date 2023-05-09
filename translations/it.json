@@ -247,7 +247,7 @@
 	  },
 	  "thankYouDonationModal":{
 		"title":"Grazie per la tua donazione!",
-		"content":"Il tuo aiuto è molto apprezzato. <br/>Questa donazione contribuirà a rendere DynexWallet ancora migliore",
+		"content":"Il tuo aiuto è molto apprezzato. Questa donazione contribuirà a rendere DynexWallet ancora migliore",
 		"confirmText":"Ok"
 	  },
 	  "transferSentModal":{

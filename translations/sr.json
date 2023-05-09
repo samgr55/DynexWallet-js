@@ -249,7 +249,7 @@
 	  },
 	  "thankYouDonationModal":{
 		"title":"Хвала вам на донацији!",
-		"content":"Ваша помоћ је добродошла.<br/>Ваша донација ће помоћи при даљем развитку DynexWallet",
+		"content":"Ваша помоћ је добродошла. Ваша донација ће помоћи при даљем развитку DynexWallet",
 		"confirmText":"Затвори"
 	  },
 	  "transferSentModal":{

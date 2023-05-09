@@ -246,7 +246,7 @@
       },
       "thankYouDonationModal": {
         "title": "برای ارسال کادو از شما متشکریم",
-        "content": "کمک شما بسیار تاثیرگذار است<br/>کمک شما برای ادامه به کار پروژه DynexWallet بسیار ضروری است",
+        "content": "کمک شما بسیار تاثیرگذار است .. کمک شما برای ادامه به کار پروژه DynexWallet بسیار ضروری است",
         "confirmText": "بستن"
       },
       "transferSentModal": {
