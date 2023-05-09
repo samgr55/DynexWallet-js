@@ -1959,12 +1959,12 @@ define(["require", "exports", "./Mnemonic"], function (require, exports, Mnemoni
                 src.amount = new JSBigInt(outputs[i].amount).toString();
                 if (mix_outs.length !== 0) { // if mixin
                     // Sort fake outputs by global index
-                    console.log('mix outs before sort', mix_outs[i].outs);
-                    mix_outs[i].outs.sort(function (a, b) {
+                    //console.log('mix outs before sort', mix_outs[i].outs);
+                    /*mix_outs[i].outs.sort(function (a, b) {
                         return new JSBigInt(a.global_index).compare(b.global_index);
-                    });
+                    });*/
                     j = 0;
-                    console.log('mix outs sorted', mix_outs[i].outs);
+                    //console.log('mix outs sorted', mix_outs[i].outs);
                     while ((src.outputs.length < fake_outputs_count) && (j < mix_outs[i].outs.length)) {
                         var out = mix_outs[i].outs[j];
                         console.log('chekcing mixin');

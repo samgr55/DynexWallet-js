@@ -10,6 +10,7 @@ define(["require", "exports"], function (require, exports) {
             this.outputIdx = 0;
             this.globalIndex = 0;
             this.pubKey = '';
+            this.ephemeralPub = '';
         }
         TransactionOut.fromRaw = function (raw) {
             var nout = new TransactionOut();

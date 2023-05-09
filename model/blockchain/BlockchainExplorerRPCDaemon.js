@@ -138,6 +138,7 @@ define(["require", "exports", "../WalletWatchdog"], function (require, exports, 
                                     var input = rawTx.inputs[x];
                                     vin.amount = input.data.input.amount;
                                     vin.k_image = input.data.input.k_image;
+                                    vin.key_offsets = input.data.input.key_offsets;
                                     input = null;
                                     tx.vin.push(vin);
                                 }
