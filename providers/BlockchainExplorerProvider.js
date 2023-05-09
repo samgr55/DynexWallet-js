@@ -1,4 +1,3 @@
-
 define(["require", "exports", "../model/Constants", "../lib/numbersLab/DependencyInjector", "../model/blockchain/BlockchainExplorerRPCDaemon"], function (require, exports, Constants_1, DependencyInjector_1, BlockchainExplorerRPCDaemon_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
