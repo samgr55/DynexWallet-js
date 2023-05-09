@@ -1,4 +1,3 @@
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -21,7 +20,7 @@ define(["require", "exports", "./Transaction", "./KeysRepository", "../lib/numbe
             this.checkMinerTx = false;
             this.readSpeed = 10;
             this.customNode = false;
-            this.nodeUrl = 'http://137.220.61.126:18333/';
+            this.nodeUrl = 'http://127.0.0.1:18333/';
         }
         WalletOptions.fromRaw = function (raw) {
             var options = new WalletOptions();
