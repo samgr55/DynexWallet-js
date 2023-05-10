@@ -2,7 +2,7 @@
 var global = typeof window !== 'undefined' ? window : self;
 global.config = {
     nodeList: [
-        "https://node.dynexcoin.org:18334/getheight"
+        "https://node.dynexcoin.org:18334/"
         
     ],
     nodeUrl: "",
