@@ -7,8 +7,8 @@
     "menu": {
       "home": "主页",
       "account": "帐户",
-      "send": "发送",
-      "receive": "接收",
+      "send": "转账",
+      "receive": "收款",
       "export": "导出",
       "donate": "捐助",
       "settings": "设置",
@@ -65,12 +65,12 @@
     },
     "homepage": {
       "mainTitle": "欢迎使用 Dynex 钱包",
-      "tagLine": "全球首个去中心化神经拟态超级计算平台",
+      "tagLine": "全球首个基于柔性区块链的神经形态超级计算平台",
       "actions": {
         "loadWallet": "加载我的钱包",
         "importWallet": "导入钱包",
         "create": "创建",
-        "createWallet": "创建一个钱包"
+        "createWallet": "创建新钱包"
       },
 	  "notes": {
 		"secure": {
@@ -93,13 +93,13 @@
     },
     "accountPage": {
       "title": "帐户",
-      "subtitle": "您的帐户概览和交易记录",
+      "subtitle": "您的账户和流水",
       "synchronizingBlock": {
         "text": "同步中..."
       },
       "balanceBlock": {
-        "title": "您的余额",
-        "total": "全部的",
+        "title": "余额",
+        "total": "总可用余额",
         "unlocked": "解锁",
         "pending": "等待中"
       },
@@ -109,7 +109,7 @@
         "emptyWallet": "您的钱包目前没有资金。",
         "waitSync": "请等待钱包更新完毕",
         "beReallyPatient": "初始化设置可能比较耗时......",
-        "getCoinAddress": "收到DNX"
+        "getCoinAddress": "收款记录"
       },
       "txDetails": {
         "title": "交易明细",
@@ -142,20 +142,20 @@
     },
     "createWalletPage": {
       "generatingStep": {
-        "title": "您的钱包正在生成......",
-        "subtitle": "差不多快好了",
+        "title": "正在生成您的钱包......",
+        "subtitle": "请稍等，将很快完成",
         "waitingMessage": "正在生成您的钱包......"
       },
       "finalizationStep": {
-        "title": "这很简单，您的帐户已准备就绪！",
+        "title": "您的钱包已经准备完成 !",
         "subtitle": "准备好使用 Dynex，就像您从未有过的那样",
         "passwordSelectionBlock": {
-          "label": "保护您的钱包"
+          "label": "创建密码以保护钱包"
         },
         "passwordConfirmBlock": {
-          "label": "确认密码"
+          "label": "再次确认"
         },
-        "validPassword": "使用此密码",
+        "validPassword": "完成创建",
         "backupBlock": {
           "title": "保存您的私人凭据以便后期用于恢复钱包。",
           "option1": "选项1：",
@@ -171,16 +171,16 @@
         }
       },
       "disclaimerBlock": {
-        "title": "使用Dynex钱包的风险",
-        "content": "Dynex 钱包是一个基于网络的界面。 它可以帮助您在不运行完整 Dynex 节点的情况下使用 Dynex。<br/>我们建议您像对待您的实际钱包一样对待 Dynex 钱包。"
+        "title": "Dynex钱包使用注意事项",
+        "content": "此钱包是页面是基于网页，您可以在不运行完整的Dynex节点的情况下使用本钱包 <br/>它和您的其他钱包一样，请做好应急备份并妥善保管助记词以及密码。"
       }
     },
     "donatePage": {
       "title": "捐助",
-      "subtitle": "Show some love to Cali Team for building this wallet",
+      "subtitle": "您为CALI团队的捐助将将会让钱包更加完善",
       "webwalletBlock": {
         "title": "DynexWallet",
-        "content":"This wallet is built with community contribution by Samer Rahmeh (@samgr55),show some love to his team: <br/><br/>"
+        "content":"此钱包地址是Samer Rahmeh(@samgr55)为社区创建的钱包，请支持他的团队: <br/><br/>"
       },
       "devFundBlock": {
         "title": "",
@@ -216,18 +216,18 @@
       }
     },
     "sendPage": {
-      "title": "发送DNX",
+      "title": "转账DNX",
       "sendBlock": {
         "address": {
           "label": "目标地址",
-          "placeholder": "写下您要汇款目标地址",
+          "placeholder": "输入转账目标钱包地址",
           "invalid": "非法的目标地址",
           "fundsTo": "资金将被发送到",
-          "receiver": "接收者",
+          "receiver": "收款者",
           "description": "描述"
         },
         "amount": {
-          "label": "发送金额",
+          "label": "转账金额",
           "invalid": "金额无效"
         },
         "paymentId": {
@@ -238,7 +238,7 @@
           "label":"隐私",
           "invalid":"mixin 无效，应为 3 到 10 或零"
         },
-        "sendButton": "发送",
+        "sendButton": "转账",
         "cancelButton": "取消"
       },
       "qrCodeScanning": {
@@ -288,22 +288,22 @@
       }
     },
     "receivePage": {
-      "title": "收到DNX",
+      "title": "收款记录",
       "receiveBlock": {
         "address": {
-          "title": "您收到资金的地址：",
-          "label": "给这个地址接收资金"
+          "title": "您的收款地址：",
+          "label": "以下是您的收款地址"
         },
         "qrCode": {
-          "title": "或者个性化二维码:",
-          "labelAmount": "金额（可选）",
-          "labelRecipient": "收据名称 (可选)",
-          "labelDescription": "交易描述 (可选)",
-          "updateButton": "更新"
+          "title": "或者生成收款二维码:",
+          "labelAmount": "输入收款金额(可不填)",
+          "labelRecipient": "交易收据/商品名称(可不填)",
+          "labelDescription": "交易备注(可不填)",
+          "updateButton": "生成二维码"
         }
       },
       "qrBlock": {
-        "title": "您的自定义二维码"
+        "title": "生成 的收款二维码"
       },
       "waitingNfcToWriteModal": {
         "title": "等待 Nfc",
@@ -373,7 +373,7 @@
         "currentScanningHeight": {
           "label": "当前扫描高度"
         },
-        "updateButton": "更新"
+        "updateButton": "生成二维码"
       },
       "deleteWalletModal": {
         "title": "删除我的钱包（本地副本)",
@@ -410,20 +410,20 @@
       }
     },
     "exportPage": {
-      "title": "备份您的证书",
+      "title": "备份您的钱包",
       "publicAddressBlock": {
-        "title": "您的公开地址"
+        "title": "您的收款公开地址"
       },
       "pdfBlock": {
-        "title": "PDF备份",
+        "title": "下载备份PDF",
         "downloadButton": "下载"
       },
       "warningBlock": {
         "title": "警告",
-        "content": "如果您选择保存您的私钥和助记词，为了您的资金安全，请务必不要将它们明文存储在任何地方。<br/>这些文件是您的私钥，包含您的之后用来钱包同步所需的所有交易信息内容。The file is an alternate solution where your keys are encrypted。"
+        "content": "为了您的资金安全，您获取私钥和助记词之后，请妥善保管它们。<br/>您下载或记录的文件是您的私钥，包含您的同步信息和交易记录。而且此文件是替代秘钥加密钱包的方案。"
       },
       "exportBlock": {
-        "title": "导出证书",
+        "title": "导出备份文件",
         "privateKeysButton": "获取我的私钥",
         "mnemonicKeysButton": "获取我的助记词",
         "fileButton": "导出到一个文件"
