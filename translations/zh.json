@@ -426,7 +426,7 @@
         "title": "导出备份文件",
         "privateKeysButton": "获取我的私钥",
         "mnemonicKeysButton": "获取我的助记词",
-        "fileButton": "导出到一个文件"
+        "fileButton": "导出到本地"
       },
       "walletKeysModal": {
         "title": "私钥",
