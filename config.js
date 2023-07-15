@@ -6,9 +6,9 @@ global.config = {
         
     ],
     nodeUrl: "",
-    mainnetExplorerUrl: "https://dynex.dyndns.org/home.php",
-    mainnetExplorerUrlHash: "https://dynex.dyndns.org/show_transaction.php?tx={ID}",
-    mainnetExplorerUrlBlock: "https://dynex.dyndns.org/show_transaction.php?tx={ID}",
+    mainnetExplorerUrl: "https://explorer.dynexcoin.org/",
+    mainnetExplorerUrlHash: "https://explorer.dynexcoin.org/show_transaction?tx={ID}",
+    mainnetExplorerUrlBlock: "https://explorer.dynexcoin.org/show_transaction?tx={ID}",
     testnetExplorerUrl: "",
     testnetExplorerUrlHash: "",
     testnetExplorerUrlBlock: "",
